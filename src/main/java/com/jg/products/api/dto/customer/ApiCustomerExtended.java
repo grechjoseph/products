@@ -1,8 +1,10 @@
 package com.jg.products.api.dto.customer;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString(callSuper = true)
 public class ApiCustomerExtended extends ApiCustomer {
 
     private final Long id;
