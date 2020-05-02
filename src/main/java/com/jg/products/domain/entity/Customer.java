@@ -29,7 +29,7 @@ public class Customer {
     @NotEmpty
     private String lastName;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(
             name = "customer_product_assignment",
             joinColumns = @JoinColumn(name = "customer_id"),
