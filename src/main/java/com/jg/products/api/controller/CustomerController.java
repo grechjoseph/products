@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller to manage {@link com.jg.products.domain.entity.Customer} objects and
+ * their {@link com.jg.products.domain.entity.Product} assignments.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/customers")

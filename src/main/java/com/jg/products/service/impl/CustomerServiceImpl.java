@@ -3,6 +3,7 @@ package com.jg.products.service.impl;
 import com.jg.products.domain.entity.Customer;
 import com.jg.products.domain.entity.Product;
 import com.jg.products.domain.exception.BaseException;
+import com.jg.products.domain.exception.ErrorCode;
 import com.jg.products.domain.repository.CustomerRepository;
 import com.jg.products.service.CustomerService;
 import com.jg.products.service.ProductService;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
-import static com.jg.products.domain.exception.ErrorCode.CUSTOMER_NOT_FOUND;
+import static com.jg.products.domain.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +54,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Set<Product> createCustomerProductAssignment(final Long customerId, final Long productId) {
         final Customer customer = getCustomerById(customerId);
+
+        if(customer.getAssignedProducts().stream().anyMatch(product -> product.getId().equals(productId))) {
+            throw new BaseException(CUSTOMER_PRODUCT_ASSIGNMENT_ALREADY_EXISTS);
+        }
+
         customer.getAssignedProducts().add(productService.getProductById(productId));
         return customerRepository.save(customer).getAssignedProducts();
     }
@@ -65,7 +71,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Set<Product> deleteCustomerProductAssignment(final Long customerId, final Long productId) {
         final Customer customer = getCustomerById(customerId);
-        customer.getAssignedProducts().remove(productService.getProductById(productId));
+        customer.getAssignedProducts().remove(
+                customer.getAssignedProducts().stream()
+                        .filter(product -> product.getId().equals(productId))
+                        .findAny()
+                        .orElseThrow(() -> new BaseException(CUSTOMER_PRODUCT_ASSIGNMENT_NOT_FOUND))
+        );
         return customerRepository.save(customer).getAssignedProducts();
     }
 }

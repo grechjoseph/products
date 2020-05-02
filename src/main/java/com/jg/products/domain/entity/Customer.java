@@ -12,6 +12,9 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity object of a Customer.
+ */
 @Data
 @Entity
 @Builder

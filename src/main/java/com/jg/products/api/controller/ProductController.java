@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller to manage {@link com.jg.products.domain.entity.Product} objects.
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/products")

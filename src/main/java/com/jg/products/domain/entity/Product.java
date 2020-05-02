@@ -12,6 +12,9 @@ import javax.validation.constraints.NotEmpty;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * Entity object of a Product.
+ */
 @Data
 @Entity
 @Builder
