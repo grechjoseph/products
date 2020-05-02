@@ -20,3 +20,6 @@ Swagger API Documentation: <a href='http://localhost:8080/swagger-ui.html'>http:
         <li>Flyway (Database Migration)</li>
         <li>Orika (Model Mapping)</li>
     </ol>
+    
+<h2>Miscellaneous</h2>
+This project also includes CustomBeanController to experiment with Beans of different scopes. 
