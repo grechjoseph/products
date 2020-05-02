@@ -2,6 +2,8 @@ package com.jg.products.service.impl;
 
 import com.jg.products.domain.entity.Customer;
 import com.jg.products.domain.entity.Product;
+import com.jg.products.domain.exception.BaseException;
+import com.jg.products.domain.exception.ErrorCode;
 import com.jg.products.domain.repository.CustomerRepository;
 import com.jg.products.service.CustomerService;
 import com.jg.products.service.ProductService;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+
+import static com.jg.products.domain.exception.ErrorCode.CUSTOMER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(final Long customerId) {
-        return customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("Customer not found."));
+        return customerRepository.findById(customerId).orElseThrow(() -> new BaseException(CUSTOMER_NOT_FOUND));
     }
 
     @Override

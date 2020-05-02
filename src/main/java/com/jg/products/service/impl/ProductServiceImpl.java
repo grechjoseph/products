@@ -1,12 +1,16 @@
 package com.jg.products.service.impl;
 
 import com.jg.products.domain.entity.Product;
+import com.jg.products.domain.exception.BaseException;
+import com.jg.products.domain.exception.ErrorCode;
 import com.jg.products.domain.repository.ProductRepository;
 import com.jg.products.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.jg.products.domain.exception.ErrorCode.PRODUCT_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(final Long productId) {
-        return productRepository.findById(productId).orElseThrow(() -> new RuntimeException("Product not found."));
+        return productRepository.findById(productId).orElseThrow(() -> new BaseException(PRODUCT_NOT_FOUND));
     }
 
     @Override
