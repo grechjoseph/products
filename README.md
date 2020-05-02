@@ -13,3 +13,6 @@ This application providers REST endpoints to:
 4. H2 (In memory database)
 5. Flyway (Database Migration)
 6. Orika (Model Mapping) 
+
+<h2>Documentation</h2>
+<a href='http://localhost:8080/swagger-ui.html'>Swagger Documentation</a>
