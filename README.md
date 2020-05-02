@@ -21,5 +21,18 @@ Swagger API Documentation: <a href='http://localhost:8080/swagger-ui.html'>http:
         <li>Orika (Model Mapping)</li>
     </ol>
     
+<h2>Running the Application</h2>
+To run the application:
+    <ol>
+        <li> Run command <b>mvn clean install</b>. This created the customer-products-assignment-application.jar file.
+        <li> Run the JAR file using the command <b>java -jar customer-products-assignment-application.jar</b>.
+    </ol>
+    
+To build and run a Docker image:
+    <ol>
+        <li>Build the Docker image using the command <b>docker build -t product .</b> (where 'products' is the name of the image).</li>
+        <li>Run the Docker image using the command <b>docker run -p 8080:8080 products</b> (where 1234 is the local port to redirect the container port to, and products is the image name).</li>
+    </ol>
+    
 <h2>Miscellaneous</h2>
 This project also includes CustomBeanController to experiment with Beans of different scopes. 
