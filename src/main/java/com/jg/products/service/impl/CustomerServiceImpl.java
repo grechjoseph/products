@@ -3,7 +3,6 @@ package com.jg.products.service.impl;
 import com.jg.products.domain.entity.Customer;
 import com.jg.products.domain.entity.Product;
 import com.jg.products.domain.exception.BaseException;
-import com.jg.products.domain.exception.ErrorCode;
 import com.jg.products.domain.repository.CustomerRepository;
 import com.jg.products.service.CustomerService;
 import com.jg.products.service.ProductService;

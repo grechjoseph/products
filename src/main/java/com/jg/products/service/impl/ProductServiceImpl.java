@@ -2,7 +2,6 @@ package com.jg.products.service.impl;
 
 import com.jg.products.domain.entity.Product;
 import com.jg.products.domain.exception.BaseException;
-import com.jg.products.domain.exception.ErrorCode;
 import com.jg.products.domain.repository.ProductRepository;
 import com.jg.products.service.ProductService;
 import lombok.RequiredArgsConstructor;
