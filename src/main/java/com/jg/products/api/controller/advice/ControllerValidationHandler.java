@@ -22,9 +22,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Validation Handler for the application's REST Controllers.
+ */
 @ControllerAdvice
 public class ControllerValidationHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * Handle Http Message Not Readable (eg: Broken JSON).
+     */
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex,
                                                                   final HttpHeaders headers,
@@ -33,6 +39,19 @@ public class ControllerValidationHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(new MapEntry<>("error", ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Handle cases that throw {@link BaseException}.
+     */
+    @ExceptionHandler(BaseException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<MapEntry<String, ErrorCode>> processBaseException(final BaseException ex) {
+        return new ResponseEntity<>(new MapEntry<>("error", ex.getErrorCode()), HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Handle Method Argument Not Valid (eg: null for not-nullable field).
+     */
     @Override
     public ResponseEntity handleMethodArgumentNotValid(final MethodArgumentNotValidException exception,
                                                        final HttpHeaders headers,
@@ -49,13 +68,6 @@ public class ControllerValidationHandler extends ResponseEntityExceptionHandler 
         );
 
         return new ResponseEntity<>(invalidArgumentInfo, headers, status);
-    }
-
-    @ExceptionHandler(BaseException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    public ResponseEntity<MapEntry<String, ErrorCode>> processBaseException(final BaseException ex) {
-        return new ResponseEntity<>(new MapEntry<>("error", ex.getErrorCode()), HttpStatus.BAD_REQUEST);
     }
 
     @Data
